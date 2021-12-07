@@ -1,6 +1,13 @@
 ## notes.txt
 
 
-1) It's advised to run one type of UserBot per file
+1) It's advised to run one type of UserBot per file.
 Furthermore, the core.py file just serves as a building block for the other files. It imports all the dependencies and files automatically.
 Hence, it's advised to run the core.py file before anything else.
+
+2) Each object (manager or worker) represents a Bot object. Think of these extra Manager and Worker classes as a layer. The layer adds the ability for the userbots to work together in a network, efficiently.
+The Bot attribute of a class can be accessed through ```classInstance.bot```.
+
+3) The framework uses the latest version of discord.py-self as a building block.
+discord.py-self is a fork of the popular discord.py wrapper. It allows one to interact with a user account, instead of a bot account.
+
