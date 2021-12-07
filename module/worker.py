@@ -3,21 +3,25 @@
 
 class UserBot:
 
-  def __init__(self, manager: int):
+  def __init__(self, manager: int, base: int):
     # prefix for the userbot
     self.prefix = "!"
-
-    # teammates
-    self.team = team
 
     # manager
     self.manager = manager
 
+    # base
+    self.base = base
+
     # the bot instance made here can be interacted using instance.bot
     self.bot = commands.Bot(command_prefix=prefix)
+
+  async def prep(self):
     await self.bot.wait_until_ready()
+
+
  
   async def listen(self):
     while True:
-      order = await self.bot.wait_for("message", check=lambda m: m.message.author.id == self.manager)
-      eval str(order.content)
+      order = await self.bot.wait_for("message", check=lambda m: m.author.id == self.manager and m.channel == base)
+      eval(str(order.content))
