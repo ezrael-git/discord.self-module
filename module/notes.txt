@@ -1,4 +1,0 @@
-## notes.txt
-
-
-1) It's advised to run one type of UserBot per file
