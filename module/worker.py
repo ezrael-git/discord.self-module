@@ -1,16 +1,18 @@
-# contains all the code required to manage the network
-# this is just a framework. to add more code, you can do so in index.py
+# a layer
+# makes the normal discord-self bot instance able to work in a network
+
 class UserBot:
 
-  def __init__(self, prefix: str, manager: int, creds: list):
+  def __init__(self, manager: int):
     # prefix for the userbot
-    self.prefix = prefix
+    self.prefix = "!"
+
     # teammates
     self.team = team
+
     # manager
     self.manager = manager
-    # bot email, pass / token
-    self.creds = creds
+
     # the bot instance made here can be interacted using instance.bot
     self.bot = commands.Bot(command_prefix=prefix)
     await self.bot.wait_until_ready()
@@ -19,9 +21,3 @@ class UserBot:
     while True:
       order = await self.bot.wait_for("message", check=lambda m: m.message.author.id == self.manager)
       eval str(order.content)
-
-  def run(self):
-    if len(self.creds) == 1:
-      self.run(self.creds[0])
-    else:
-      self.run(self.creds[0], self.creds[1])
