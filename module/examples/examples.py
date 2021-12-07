@@ -16,6 +16,11 @@ from core import *
 base_channel = 0
 target_channel = 0
 
+# let's declare the file type,
+# file types help our program understand whether we're going to be working with a worker class or a manager class - or both - in the file
+# for this example, we'll be declaring the dual filetype since we're going to work with both a manager class and a worker class in the same file
+dsf.filetype("dual")
+
 # creating and preparing a manager object
 manager = Manager(base_channel)
 await manager.prep()
