@@ -5,6 +5,7 @@ Designed to be as efficient as possible.
 
 # Getting Started
 1) clone the repo
-2) run master.py
+2) run core.py
 
-In case of any confusion, you can read examples.py.
+Docs: in the code
+Examples: examples.py
