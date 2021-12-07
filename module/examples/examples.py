@@ -29,8 +29,7 @@ await worker.listen()
 
 # it can now listen for orders! let's have it spam messages to the target channel
 msg = "hello!"
-code = f"while True:
-  await {target_channel}.send({msg})"
+code = f"while True:\n  await {target_channel}.send({msg})"
 
 await manager.order(code)
 
