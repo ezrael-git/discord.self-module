@@ -11,7 +11,7 @@ class Manager:
     # instance made here can be used instance.bot
     self.bot = commands.Bot(command_prefix=self.prefix)
 
-  async def prep():
+  async def prep(self):
     await self.bot.wait_until_ready()
     self.base = self.bot.get_channel(self.base)
 
