@@ -33,9 +33,16 @@ def git(file):
 class dsf:
   @classmethod
   def filetype(self, name):
-    valid = ["worker", "manager", "__ignore__"]
+    valid = ["worker", "manager", "dual", "__ignore__"]
     if name in valid:
-      git(name)
+      if name not valid[2] or name not valid[3]:
+        git(name + ".py")
+      else:
+        if name[2]:
+          git("worker.py")
+          git("manager.py")
+        else:
+          return
     else:
       raise ValueError(f"Invalid file-type: {name}")
 
