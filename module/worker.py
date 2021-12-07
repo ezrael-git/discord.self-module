@@ -1,7 +1,7 @@
 # a layer
 # makes the normal discord-self bot instance able to work in a network
 
-class UserBot:
+class Worker:
 
   def __init__(self, manager: int, base: int):
     # prefix for the userbot
