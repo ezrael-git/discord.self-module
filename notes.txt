@@ -2,3 +2,5 @@
 
 
 1) It's advised to run one type of UserBot per file
+Furthermore, the core.py file just serves as a building block for the other files. It imports all the dependencies and files automatically.
+Hence, it's advised to run the core.py file before anything else.
