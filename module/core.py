@@ -23,7 +23,7 @@ def git(file):
   g = Github()
   r = g.get_repo(git_info["author"] + "/" + git_info["repo"])
   c = r.get_contents("/module/" + file).decoded_content.decode()
-  f = open(file, w)
+  f = open(file, "w")
   f.write(str(c))
   f.close()
   exec(open(file).read(), globals())
