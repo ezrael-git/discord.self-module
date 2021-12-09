@@ -35,7 +35,7 @@ class dsf:
   def filetype(self, name):
     valid = ["worker", "manager", "dual", "__ignore__"]
     if name in valid:
-      if name not valid[2] and name not valid[3]:
+      if name != valid[2] and name != valid[3]:
         git(name + ".py")
       else:
         if name[2]:
