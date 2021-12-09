@@ -1,10 +1,13 @@
 # a layer
-# allows for the normal discord-self bot instance to order 
-# requires a team of properly configured workers
-
+"""
+this layer allows the normal bot instance to order workers
+the order must be of a raw github page containing code to be executed
+"""
 
 class Manager:
-  def __init__(self, base):
+  def __init__(self, base, **kwargs):
+    self.listen = kwargs.get("listen")
+    
     self.prefix = "!"
     self.base = base
 
@@ -15,10 +18,15 @@ class Manager:
     await self.bot.wait_until_ready()
     self.base = self.bot.get_channel(self.base)
 
-  async def order(self, code, **kwargs):
-    listen = kwargs.get("listen")
+  async def order(self, link):
+
+    await self.base.send(str(link))
+    # listens for messages
+    # useful when you want stats
+    # however, can slow down messaging to avoid getting caught by the API
+    if self.listen:
+      count = 0
+      while True:
+        msg = await self.bot.wait_for("message", check=lambda m: m.channel == base)
+        count += 1
     
-    await self.base.send(str(code))
-    if listen:
-      msg = await self.bot.wait_for("message", check=lambda m: m.channel == base)
-      return msg
