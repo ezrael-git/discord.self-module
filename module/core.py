@@ -10,7 +10,7 @@ import os
 git_info = {
   "author": "ezrael-git",
   "repo": "discord.self.framework",
-  "path": f"{repo}/module/"
+  "path": "discord.self.framework/module/"
 }
 
 
