@@ -21,7 +21,7 @@ def git(file):
   if os.path.exists("./" + file) == True:
     return
   g = Github()
-  r = g.get_repo(git_info["path"])
+  r = g.get_repo(git_info["repo"])
   c = r.get_contents(file).decoded_content.decode()
   f = open(file, w)
   f.write(str(c))
