@@ -22,7 +22,7 @@ class Worker:
     
 
     # the bot instance made here can be interacted using instance.bot
-    self.bot = commands.Bot(command_prefix=prefix)
+    self.bot = commands.Bot(command_prefix=self.prefix)
 
   async def prep(self):
     await self.bot.wait_until_ready()
