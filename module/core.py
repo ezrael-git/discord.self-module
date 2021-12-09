@@ -8,8 +8,8 @@ import os
 
 # core data types
 git_info = {
-  author: "ezrael-git"
-  repo: "discord.self.framework"
+  author: "ezrael-git",
+  repo: "discord.self.framework",
   path: f"{repo}/module/"
 }
 
