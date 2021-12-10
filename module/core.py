@@ -54,7 +54,10 @@ def git(file, branch="development", mode=0, **kwargs):
 
     file_content = repo.get_contents(target, ref=sha).decoded_content.decode()
 
-    exec(file_content, globals())
+    if mode == 1:
+      exec(file_content, globals())
+    elif mode == 2:
+      return file_content
 
 
 
