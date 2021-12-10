@@ -30,7 +30,6 @@ def get_sha_for_tag(repository, tag):
     return matched_tags[0].commit.sha
 
 
-file_contents = repo.get_contents(target, ref=sha)
 
 def git(file, branch="development"):
   ghub = Github()
