@@ -31,18 +31,31 @@ def get_sha_for_tag(repository, tag):
 
 
 
-def git(file, branch="development"):
-  ghub = Github()
-  repo = ghub.get_repo(git_info["author"] + "/" + git_info["repo"])
-  branch = repo.get_branch(branch=branch)
+def git(file, branch="development", mode=0, **kwargs):
+  if mode == 0:
+    ghub = Github()
+    repo = ghub.get_repo(git_info["author"] + "/" + git_info["repo"])
+    branch = repo.get_branch(branch=branch)
 
-  target = "/module/" + file
-  sha = get_sha_for_tag(repo, branch.name)
+    target = "/module/" + file
+    sha = get_sha_for_tag(repo, branch.name)
 
-  file_content = repo.get_contents(target, ref=sha).decoded_content.decode()
+    file_content = repo.get_contents(target, ref=sha).decoded_content.decode()
 
-  exec(file_content, globals())
-  print(file_content)
+    exec(file_content, globals())
+
+  else:
+    ghub = Github()
+    repo = ghub.get_repo(kwargs.get("author") + "/" + kwargs.get("repo"))
+    branch = repo.get_branch(branch=kwargs.get("branch"))
+
+    target = kwargs.get("target")
+    sha = get_sha_for_tag(repo, branch.name)
+
+    file_content = repo.get_contents(target, ref=sha).decoded_content.decode()
+
+    exec(file_content, globals())
+
 
 
 class dsf:
