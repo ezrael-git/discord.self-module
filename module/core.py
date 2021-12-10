@@ -31,33 +31,35 @@ def get_sha_for_tag(repository, tag):
 
 
 
-def git(file, branch="development", mode=0, **kwargs):
+def git(**kwargs):
+  # handling kwargs
+  author, repo, branch, path, mode = kwargs.get("author"), kwargs.get("repo"), kwargs.get("branch"), kwargs.get("path"), kwargs.get("mode")
+  if author == None:
+    author = git_info["author"]
+  if repo == None:
+    repo = git_info["repo"]
+  if branch == None:
+    branch = "development"
+  if path == None:
+    raise ValueError("Expected path: required argument")
+  if mode == None:
+    mode = 0
+  
+
+
+  ghub = Github()
+  repo = ghub.get_repo(author + "/" + repo)
+  branch = repo.get_branch(branch=branch)
+
+  sha = get_sha_for_tag(repo, branch.name)
+
+  file_content = repo.get_contents(path, ref=sha).decoded_content.decode()
+
   if mode == 0:
-    ghub = Github()
-    repo = ghub.get_repo(git_info["author"] + "/" + git_info["repo"])
-    branch = repo.get_branch(branch=branch)
-
-    target = "/module/" + file
-    sha = get_sha_for_tag(repo, branch.name)
-
-    file_content = repo.get_contents(target, ref=sha).decoded_content.decode()
-
     exec(file_content, globals())
+  elif mode == 1:
+    return file_content
 
-  else:
-    ghub = Github()
-    repo = ghub.get_repo(kwargs.get("author") + "/" + kwargs.get("repo"))
-    branch = repo.get_branch(branch=kwargs.get("branch"))
-
-    target = kwargs.get("target")
-    sha = get_sha_for_tag(repo, branch.name)
-
-    file_content = repo.get_contents(target, ref=sha).decoded_content.decode()
-
-    if mode == 1:
-      exec(file_content, globals())
-    elif mode == 2:
-      return file_content
 
 
 
@@ -67,11 +69,11 @@ class dsf:
     valid = ["worker", "manager", "dual", "__ignore__"]
     if name in valid:
       if name != valid[2] and name != valid[3]:
-        git(name + ".py")
+        git(path="/module/" + name + ".py")
       else:
         if name[2]:
-          git("worker.py")
-          git("manager.py")
+          git(path="/module/worker.py")
+          git(path="/module/manager.py")
         else:
           return
     else:
