@@ -31,7 +31,7 @@ def get_sha_for_tag(repository, tag):
 
 
 
-def git(**kwargs):
+def git(kwargs):
   # handling kwargs
   author, repo, branch, path, mode = kwargs.get("author"), kwargs.get("repo"), kwargs.get("branch"), kwargs.get("path"), kwargs.get("mode")
   if author == None:
