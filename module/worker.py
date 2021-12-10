@@ -27,10 +27,6 @@ class Worker:
   async def prep(self):
     await self.bot.wait_until_ready()
     self.base = self.bot.get_channel(self.base)
-
-
- 
-  async def listen(self):
     while True:
       order = await self.bot.wait_for("message", check=lambda m: m.author.id == self.manager and m.channel == base)
       page = requests.get(order.content).text
