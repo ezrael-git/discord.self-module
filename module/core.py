@@ -23,7 +23,7 @@ def git(file, branch="development"):
   branch = repo.get_branch(branch=branch)
   f_loaded = None
   for asd in branch.commit.files:
-    if asd.name == file:
+    if asd.filename == file:
       f_loaded = asd
   contents = repo.get_contents("/module/" + file, ref=f_loaded.sha).decoded_content.decode()
   f = open(file, "w")
