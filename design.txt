@@ -1,4 +1,4 @@
-## notes.txt
+## design.txt
 
 
 1) It's advised to run one type of UserBot per file.
@@ -10,4 +10,5 @@ The Bot attribute of a class can be accessed through ```classInstance.bot```.
 
 3) The framework uses the latest version of discord.py-self as a building block.
 discord.py-self is a fork of the popular discord.py wrapper. It allows one to interact with a user account, instead of a bot account.
+
 
