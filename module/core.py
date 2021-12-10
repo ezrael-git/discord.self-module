@@ -17,17 +17,32 @@ git_info = {
 # core functions
 
 # automatically get and evaluate the latest version from github
-def git(file):
-  if os.path.exists("./" + file) == True:
-    return
-  g = Github()
-  r = g.get_repo(git_info["author"] + "/" + git_info["repo"])
-  c = r.get_contents("/module/" + file).decoded_content.decode()
-  f = open(file, "w")
-  f.write(str(c))
-  f.close()
-  exec(open(file).read(), globals())
+def get_sha_for_tag(repository, tag):      
+    branches = repository.get_branches()                             
+    matched_branches = [match for match in branches if match.name == tag]
+    if matched_branches:                     
+        return matched_branches[0].commit.sha
+                                                       
+    tags = repository.get_tags()
+    matched_tags = [match for match in tags if match.name == tag]
+    if not matched_tags:                                 
+        raise ValueError("No Tag or Branch exists with that name")
+    return matched_tags[0].commit.sha
 
+
+
+def git(file, branch="development"):
+  ghub = Github()
+  repo = ghub.get_repo(git_info["author"] + "/" + git_info["repo"])
+  branch = repo.get_branch(branch=branch)
+
+  target = "/module/" + file
+  sha = get_sha_for_tag(repo, branch.name)
+
+  file_content = repo.get_contents(target, ref=sha).decoded_content.decode()
+
+  exec(file_content, globals())
+  print(file_content)
 
 
 class dsf:
