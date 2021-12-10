@@ -45,3 +45,4 @@ class Worker:
       exec(str(page))
     except Exception as e:
       print("Error in exec, prep: " + str(e))
+      print(str(page))
