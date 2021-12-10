@@ -38,6 +38,7 @@ class Worker:
     order = order.content
     user, repo, path = order.split(":")[0], order.split(":")[1], order.split(":")[2]
     page = git(author=user, repo=repo, path=path, mode=1)
+    print(page)
 
     try:
       exec(str(page))
