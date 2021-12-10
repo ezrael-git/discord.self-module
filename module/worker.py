@@ -26,7 +26,7 @@ class Worker:
 
   async def prep(self):
     await self.bot.wait_until_ready()
-    self.base = self.bot.get_channel(base)
+    self.base = self.bot.get_channel(self.base)
 
 
  
