@@ -37,7 +37,7 @@ def git(file, branch="development"):
   branch = repo.get_branch(branch=branch)
 
   target = "/module/" + file
-  sha = get_sha_for_tag(repo, branch)
+  sha = get_sha_for_tag(repo, branch.name)
 
   file_content = repo.get_contents(target, ref=sha).decoded_content.decode()
 
