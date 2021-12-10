@@ -26,6 +26,7 @@ def git(file, branch="development"):
   f.write(c)
   f.close()
   exec(open(file).read(), globals())
+  print(c)
 
 
 
