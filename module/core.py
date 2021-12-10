@@ -21,7 +21,7 @@ def git(file, branch="development"):
   ghub = Github()
   repo = ghub.get_repo(git_info["author"] + "/" + git_info["repo"])
   branch = repo.get_branch(branch=branch)
-  contents = repo.get_contents(path="/module/" + file, ref=branch.commit.sha).decoded_content.decode()
+  contents = repo.get_contents("/module/" + file, ref=branch.commit.sha).decoded_content.decode()
   exec(c, globals())
 
 
