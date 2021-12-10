@@ -11,4 +11,4 @@ The Bot attribute of a class can be accessed through ```classInstance.bot```.
 3) The framework uses the latest version of discord.py-self.
 discord.py-self is a fork of the popular discord.py wrapper. It allows one to interact with a user account, instead of a bot account.
 
-4) An order must be a link of a raw GitHub file. Some examples of an order are present in /module/orders/.
+4) An order must follow this format, leading to a GitHub file:  `user:repo:path`
