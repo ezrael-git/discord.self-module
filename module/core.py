@@ -21,7 +21,11 @@ def git(file, branch="development"):
   ghub = Github()
   repo = ghub.get_repo(git_info["author"] + "/" + git_info["repo"])
   branch = repo.get_branch(branch=branch)
-  contents = repo.get_contents("/module/" + file, ref=branch.commit.sha).decoded_content.decode()
+  f_loaded = None
+  for asd in branch.files:
+    if asd.name == file:
+      f_loaded = asd
+  contents = repo.get_contents("/module/" + file, ref=f_loaded.sha).decoded_content.decode()
   f = open(file, "w")
   f.write(c)
   f.close()
