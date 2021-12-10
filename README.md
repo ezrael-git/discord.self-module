@@ -5,9 +5,18 @@ Designed to be as efficient as possible.
 
 
 # Getting Started
-1) clone the repo
-2) run core.py
+1) download module/core.py
+2) read examples/example.py
+
+The core.py file serves as a "do-everything" file so you don't have to install anything else (other than dependencies, of course)
 
 Docs: in the code
 
-Examples: examples.py
+
+
+# Dependencies
+- discord.py-self == 1.9.1
+- Flask == 2.0.2
+- requests == 2.26.0
+- PyGithub == 1.55
+- asyncio == 3.4.3
