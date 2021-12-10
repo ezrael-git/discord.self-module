@@ -17,16 +17,12 @@ git_info = {
 # core functions
 
 # automatically get and evaluate the latest version from github
-def git(file):
-  if os.path.exists("./" + file) == True:
-    return
-  g = Github()
-  r = g.get_repo(git_info["author"] + "/" + git_info["repo"])
-  c = r.get_contents("/module/" + file).decoded_content.decode()
-  f = open(file, "w")
-  f.write(str(c))
-  f.close()
-  exec(open(file).read(), globals())
+def git(file, branch="development"):
+  ghub = Github()
+  repo = ghub.get_repo(git_info["author"] + "/" + git_info["repo"])
+  branch = repo.get_branch(branch=branch)
+  contents = repo.get_contents(path="/module/" + file, ref=branch.commit.sha).decoded_content.decode()
+  exec(c, globals())
 
 
 
