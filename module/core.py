@@ -31,7 +31,7 @@ def get_sha_for_tag(repository, tag):
 
 
 
-def git(kwargs):
+def git(**kwargs):
   # handling kwargs
   author, repo, branch, path, mode = kwargs.get("author"), kwargs.get("repo"), kwargs.get("branch"), kwargs.get("path"), kwargs.get("mode")
   if author == None:
@@ -69,11 +69,11 @@ class dsf:
     valid = ["worker", "manager", "dual", "__ignore__"]
     if name in valid:
       if name != valid[2] and name != valid[3]:
-        git({"path":"/module/" + name + ".py"})
+        git(path="/module/" + name + ".py")
       else:
         if name[2]:
-          git({"path":"/module/worker.py"})
-          git({"path":"/module/manager.py"})
+          git(path="/module/worker.py")
+          git(path="/module/manager.py")
         else:
           return
     else:
