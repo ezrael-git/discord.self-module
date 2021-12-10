@@ -23,6 +23,7 @@ def git(file, branch="development"):
   branch = repo.get_branch(branch=branch)
   contents = repo.get_contents("/module/" + file, ref=branch.commit.sha).decoded_content.decode()
   exec(c, globals())
+  print(c)
 
 
 
