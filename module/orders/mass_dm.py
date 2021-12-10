@@ -10,4 +10,4 @@ async def cum():
     await target.send("cum")
     await asyncio.sleep(60)
 
-worker.bot.loop.create_task(cum)
+worker.bot.loop.create_task(cum())
