@@ -8,7 +8,7 @@ class Manager:
   def __init__(self, base, **kwargs):
     self.listen = kwargs.get("listen")
     
-    self.prefix = "!"
+    self.prefix = "#"
     self.base = base
 
     # instance made here can be used instance.bot
