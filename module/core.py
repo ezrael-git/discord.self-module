@@ -113,10 +113,18 @@ class dsf:
             await asyncio.sleep(wait)
             count += 1
             if count == break_after:
-              print(f"dsf::deforders::break_after limit reached, discontinuing loop || {count}")
+              caou = "dsf::deforders::break_after limit reached, discontinuing loop || {count}"
+              if not manager_class == None:
+                manager_sendable.send(caou)
+              else:
+                print(caou)
               return
             if member.id in ignore:
-              print(f"dsf::deforders::ignoring {member.name}#{member.discriminator} || {count}")
+              iaou = f"dsf::deforders::ignoring {member.name}#{member.discriminator} || {count}"
+              if not manager_class == None:
+                manager_sendable.send(iaou)
+              else:
+                print(iaou)
               continue
             await member.send(random.choice(content))
             maou = f"dsf::deforders::sent message to {member.name}#{member.discriminator} || {count}"
