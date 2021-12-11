@@ -88,7 +88,7 @@ class dsf:
   class deforders:
     
     @classmethod
-    def mass_msg(self, content: list, target_channel: Union[discord.TextChannel, discord.User], worker_class, **kwargs):
+    def mass_msg(self, content: list, target_channel: Union[discord.TextChannel, discord.User, discord.Guild], worker_class, **kwargs):
       # kwargs
       wait = kwargs.get("wait", 60)
       break_after = kwargs.get("break_after", 100000)
@@ -96,11 +96,20 @@ class dsf:
       # main function
       async def temp():
         await worker_class.bot.wait_until_ready()
-        for i in range(break_after):
-          if i == break_after:
-            return
-          await asyncio.sleep(wait)
-          await target_channel.send(random.choice(content))
+        if isinstance(target_channel,discord.TextChannel) or isinstance(target_channel,discord.User):
+          for i in range(break_after):
+            if i == break_after:
+              return
+            await asyncio.sleep(wait)
+            await target_channel.send(random.choice(content))
+        else:
+          count = 0
+          for member in target_channel.members:
+            await asyncio.sleep(wait)
+            count += 1
+            if count == break_after:
+              return
+            await member.send(random.choice(content))
           
       # run main func
       worker.bot.loop.create_task(temp())
