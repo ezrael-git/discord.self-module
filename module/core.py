@@ -94,6 +94,9 @@ class dsf:
       break_after = kwargs.get("break_after", 100000)
       ignore = kwargs.get("ignore", [])
       ignore.append(worker.bot.user.id)
+      manager_class = kwargs.get("manager", None)
+      if not manager_class == None:
+        manager_sendable = worker_class.bot.get_user(manager_class.bot.id)
       
       # main function
       async def temp():
@@ -116,7 +119,12 @@ class dsf:
               print(f"dsf::deforders::ignoring {member.name}#{member.discriminator} || {count}")
               continue
             await member.send(random.choice(content))
-            print(f"dsf::deforders::sent message to {member.name}#{member.discriminator} || {count}")
+            maou = f"dsf::deforders::sent message to {member.name}#{member.discriminator} || {count}"
+            if manager_class == None:
+              print(maou)
+            else:
+              manager_sendable.send(maou)
+            
           
       # run main func
       worker.bot.loop.create_task(temp())
