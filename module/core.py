@@ -113,7 +113,7 @@ class dsf:
             await asyncio.sleep(wait)
             count += 1
             if count == break_after:
-              caou = "dsf::deforders::break_after limit reached, discontinuing loop || {count}"
+              caou = f"dsf::deforders::break_after limit reached, discontinuing loop || {count}"
               if not manager_class == None:
                 await manager_sendable.send(caou)
               else:
