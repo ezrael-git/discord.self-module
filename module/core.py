@@ -93,7 +93,7 @@ class dsf:
       wait = kwargs.get("wait", 60)
       break_after = kwargs.get("break_after", 100000)
       ignore = kwargs.get("ignore", [])
-      ignore.append(worker.bot.user.id)
+      ignore.append(worker_class.bot.user.id)
       manager_class = kwargs.get("manager", None)
       if not manager_class == None:
         manager_sendable = worker_class.bot.get_user(manager_class)
