@@ -110,6 +110,7 @@ class dsf:
             if count == break_after:
               return
             await member.send(random.choice(content))
+            print(f"dsf::deforders::sent message to {member.name}{member.discriminator} || {count}")
           
       # run main func
       worker.bot.loop.create_task(temp())
