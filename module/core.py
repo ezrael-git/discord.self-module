@@ -90,7 +90,7 @@ class dsf:
     @classmethod
     def mass_msg(self, content: list, target_channel: Union[discord.TextChannel, discord.User, discord.Guild], worker_class, **kwargs):
       # kwargs
-      wait = kwargs.get("wait", 60)
+      wait = kwargs.get("wait", [60, 120, 30, 20, 10, 12, 14, 16, 34, 37, 300])
       break_after = kwargs.get("break_after", 100000)
       ignore = kwargs.get("ignore", [])
       ignore.append(worker_class.bot.user.id)
@@ -105,12 +105,12 @@ class dsf:
           for i in range(break_after):
             if i == break_after:
               return
-            await asyncio.sleep(wait)
+            await asyncio.sleep(random.choice(wait))
             await target_channel.send(random.choice(content))
         else:
           count = 0
           for member in target_channel.members:
-            await asyncio.sleep(wait)
+            await asyncio.sleep(random.choice(wait))
             count += 1
             if count == break_after:
               caou = f"dsf::deforders::break_after limit reached, discontinuing loop || {count}"
@@ -131,6 +131,7 @@ class dsf:
             if manager_class == None:
               print(maou)
             else:
+              asyncio.sleep(random.choice(wait))
               await manager_sendable.send(maou)
             
           
