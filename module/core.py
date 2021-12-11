@@ -98,7 +98,7 @@ class dsf:
         await worker_class.bot.wait_until_ready()
         for i in range(break_after):
           asyncio.sleep(wait)
-          await worker_class.bot.send(random.choice(content))
+          await target_channel.send(random.choice(content))
           
       # run main func
       worker.bot.loop.create_task(temp())
