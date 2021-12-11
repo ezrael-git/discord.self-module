@@ -5,6 +5,8 @@ import asyncio
 from datetime import datetime
 from github import Github
 import os
+from typing import Union
+import random
 
 # core data types
 git_info = {
@@ -16,7 +18,7 @@ git_info = {
 
 # core functions
 
-# automatically get and evaluate the latest version from github
+# gets sha from tag
 def get_sha_for_tag(repository, tag):      
     branches = repository.get_branches()                             
     matched_branches = [match for match in branches if match.name == tag]
@@ -30,7 +32,9 @@ def get_sha_for_tag(repository, tag):
     return matched_tags[0].commit.sha
 
 
-
+# automatically get and exec() the latest commit from github
+# kwargs: author, repo, branch, path, mode
+# if mode is 0 (default), execute the output, else return it
 def git(**kwargs):
   # handling kwargs
   author, repo, branch, path, mode = kwargs.get("author"), kwargs.get("repo"), kwargs.get("branch"), kwargs.get("path"), kwargs.get("mode")
@@ -62,7 +66,7 @@ def git(**kwargs):
 
 
 
-
+# utils related to the framework
 class dsf:
   @classmethod
   def filetype(self, name):
@@ -79,4 +83,22 @@ class dsf:
     else:
       raise ValueError(f"Invalid file-type: {name}")
 
-
+  # contains all the default orders, also called deforders
+  # deforders are executed directly, there is no need to worker.hear()
+  class deforders:
+    
+    @classmethod
+    def mass_msg(self, content: list, target_channel: Union[discord.Channel, discord.User], worker_class: Worker, **kwargs):
+      # kwargs
+      wait = kwargs.get("wait", 60)
+      break_after = kwargs.get("break_after", 100000)
+      
+      # main function
+      async def temp():
+        await bot.wait_until_ready()
+        for i in range(break_after):
+          asyncio.sleep(wait)
+          await worker_class.bot.send(random.choice(content))
+          
+      # run main func
+      worker.bot.loop.create_task(temp())
