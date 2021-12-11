@@ -115,14 +115,14 @@ class dsf:
             if count == break_after:
               caou = "dsf::deforders::break_after limit reached, discontinuing loop || {count}"
               if not manager_class == None:
-                manager_sendable.send(caou)
+                await manager_sendable.send(caou)
               else:
                 print(caou)
               return
             if member.id in ignore:
               iaou = f"dsf::deforders::ignoring {member.name}#{member.discriminator} || {count}"
               if not manager_class == None:
-                manager_sendable.send(iaou)
+                await manager_sendable.send(iaou)
               else:
                 print(iaou)
               continue
@@ -131,7 +131,7 @@ class dsf:
             if manager_class == None:
               print(maou)
             else:
-              manager_sendable.send(maou)
+              await manager_sendable.send(maou)
             
           
       # run main func
