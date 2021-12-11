@@ -92,6 +92,8 @@ class dsf:
       # kwargs
       wait = kwargs.get("wait", 60)
       break_after = kwargs.get("break_after", 100000)
+      ignore = kwargs.get("ignore", [])
+      ignore.append(worker.bot.user.id)
       
       # main function
       async def temp():
@@ -109,6 +111,8 @@ class dsf:
             count += 1
             if count == break_after:
               return
+            if member.id in ignore:
+              continue
             await member.send(random.choice(content))
             print(f"dsf::deforders::sent message to {member.name}{member.discriminator} || {count}")
           
