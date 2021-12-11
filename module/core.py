@@ -88,7 +88,7 @@ class dsf:
   class deforders:
     
     @classmethod
-    def mass_msg(self, content: list, target_channel: Union[discord.TextChannel, discord.User], worker_class: Worker, **kwargs):
+    def mass_msg(self, content: list, target_channel: Union[discord.TextChannel, discord.User], worker_class, **kwargs):
       # kwargs
       wait = kwargs.get("wait", 60)
       break_after = kwargs.get("break_after", 100000)
