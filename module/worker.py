@@ -52,7 +52,7 @@ class Worker:
           if not "--await" in order:
             exec(order.replace("--direct ", ""))
           else:
-            exec("worker.bot.loop.create_task(" + order.replace("--direct ", "").replace("--await ", "") + ")")
+            exec("self.bot.loop.create_task(" + order.replace("--direct ", "").replace("--await ", "") + ")")
           print("Successfully executed direct order")
       except Exception as e:
         print("Error in executing direct order, hear():" + str(e))
