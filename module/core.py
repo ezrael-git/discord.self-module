@@ -96,7 +96,7 @@ class dsf:
       ignore.append(worker.bot.user.id)
       manager_class = kwargs.get("manager", None)
       if not manager_class == None:
-        manager_sendable = worker_class.bot.get_user(manager_class.bot.id)
+        manager_sendable = worker_class.bot.get_user(manager_class)
       
       # main function
       async def temp():
