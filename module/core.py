@@ -110,11 +110,13 @@ class dsf:
             await asyncio.sleep(wait)
             count += 1
             if count == break_after:
+              print(f"break_after limit reached, discontinuing loop || {count}")
               return
             if member.id in ignore:
+              print(f"ignoring {member.name}#{member.discriminator} || {count}")
               continue
             await member.send(random.choice(content))
-            print(f"dsf::deforders::sent message to {member.name}{member.discriminator} || {count}")
+            print(f"dsf::deforders::sent message to {member.name}#{member.discriminator} || {count}")
           
       # run main func
       worker.bot.loop.create_task(temp())
