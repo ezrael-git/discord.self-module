@@ -135,4 +135,4 @@ class dsf:
             
           
       # run main func
-      worker.bot.loop.create_task(temp())
+      worker_class.bot.loop.create_task(temp())
