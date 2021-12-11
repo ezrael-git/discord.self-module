@@ -97,7 +97,7 @@ class dsf:
       async def temp():
         await worker_class.bot.wait_until_ready()
         for i in range(break_after):
-          asyncio.sleep(wait)
+          await asyncio.sleep(wait)
           await target_channel.send(random.choice(content))
           
       # run main func
