@@ -49,7 +49,7 @@ class Worker:
         
     else:
       try:
-        exec(order.remove("--direct"))
+        exec(order.replace("--direct ", ""))
       except Exception as e:
         print("Error in executing direct order, hear():" + str(e))
       
