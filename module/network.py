@@ -7,8 +7,8 @@ class Network:
     self.manager = manager[0]
     self.workers = workers
     self.head = self.manager.bot
-    team = [self.manager]
-    for i in self.workers: team.append(i)
+    self.team = [self.manager]
+    for i in self.workers: self.team.append(i)
 
   def _bots(self):
     temp = []
