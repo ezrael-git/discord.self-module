@@ -24,13 +24,11 @@ class Network:
     output = kwargs.get("output", False)
     if output == True:
       print("dsf::connect() initiated, connecting all teammates...")
-    loop = asyncio.get_event_loop()
+
     for member,token in zip(self.team,tokens):
-      time.sleep(wait)
+      loop = asyncio.get_event_loop()
       loop.create_task(member.bot.start(token))
-      if output == True:
-        print(f"{member} has connected to Discord!")
-    loop.run_forever()
+      loop.run_forever()
 
   def disconnect(self, **kwargs):
     manager = kwargs.get("manager", False)
