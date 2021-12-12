@@ -6,7 +6,7 @@ class Network:
   def __init__(self, manager: list, workers: list):
     self.manager = manager[0]
     self.workers = workers
-    self.head = self.manager
+    self.head = self.manager.bot
     team = [self.manager]
     for i in self.workers: team.append(i)
 
