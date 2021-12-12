@@ -18,10 +18,11 @@ class Network:
   def _sendable(self, clientuser):
     return self.head.get_user(clientuser.id)
 
-  def connect(self, tokens: list):
+  async def connect(self, tokens: list, **kwargs):
+    wait = kwargs.get("wait", 30)
     loop = asyncio.get_event_loop()
     for member,token in zip(self.team,tokens):
-      self.head.loop.create_task(asyncio.sleep(10))
+      await asyncio.sleep(wait)
       loop.create_task(member.bot.start(token))
     loop.run_forever()
 
