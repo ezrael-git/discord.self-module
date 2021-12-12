@@ -22,7 +22,7 @@ class Network:
     loop = asyncio.get_event_loop()
     for member,token in zip(self.team,tokens):
       loop.create_task(member.bot.start(token))
-    loop.run_until_complete()
+    loop.run_forever()
 
   def disconnect(self, **kwargs):
     manager = kwargs.get("manager", False)
