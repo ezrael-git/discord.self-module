@@ -64,6 +64,13 @@ def git(**kwargs):
   elif mode == 1:
     return file_content
 
+# oneline for loop for direct orders
+def olfor(stop, do):
+  for i in range(int(stop)):
+    exec(do)
+    if i == int(stop):
+      return
+
 
 
 # utils related to the framework
