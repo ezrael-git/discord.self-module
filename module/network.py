@@ -20,7 +20,7 @@ class Network:
     return self.head.get_user(clientuser.id)
 
   def connect(self, tokens: list, **kwargs):
-    wait = kwargs.get("wait", 30)
+    wait = kwargs.get("wait", 15)
     output = kwargs.get("output", False)
     if output == True:
       print("dsf::connect() initiated, connecting all teammates...")
@@ -29,6 +29,11 @@ class Network:
       loop = asyncio.get_event_loop()
       loop.create_task(member.bot.start(token))
       loop.run_forever()
+      time.sleep(wait)
+      if output == True:
+        print(f"dsf::connect()::{member} has been added to the event loop")
+    if output == True:
+      print(f"dsf::connect()::resolved")
 
   def disconnect(self, **kwargs):
     manager = kwargs.get("manager", False)
