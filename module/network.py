@@ -22,7 +22,7 @@ class Network:
 
   def join_guild(self, invite, **kwargs):
     wait = kwargs.get("wait", 60)
-    for member in team:
+    for member in self.team:
       try:
         await member.bot.join_guild(invite)
         await asyncio.sleep(wait)
@@ -32,11 +32,16 @@ class Network:
 
   def leave_guild(self, id, **kwargs):
     wait = kwargs.get("wait", 60)
-    for member in team:
+    for member in self.team:
       try:
         await member.bot.leave_guild(id)
         await asyncio.sleep(wait)
       except:
         continue
     return True
+
+  def listen_for(self, type):
+    if type == "command":
+      for member in self.workers:
+        await member.hear()
     
