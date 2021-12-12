@@ -1,6 +1,7 @@
 """ network.py
 for the bundling of the manager and worker components
 """
+import time
 
 class Network:
   def __init__(self, manager: list, workers: list):
@@ -18,12 +19,12 @@ class Network:
   def _sendable(self, clientuser):
     return self.head.get_user(clientuser.id)
 
-  async def connect(self, tokens: list, **kwargs):
+  def connect(self, tokens: list, **kwargs):
     wait = kwargs.get("wait", 30)
     output = kwargs.get("output", False)
     loop = asyncio.get_event_loop()
     for member,token in zip(self.team,tokens):
-      await asyncio.sleep(wait)
+      time.sleep(wait)
       loop.create_task(member.bot.start(token))
       if output == True:
         print(f"{member.bot.user.name} has connected to Discord!")
