@@ -30,7 +30,7 @@ def get_sha_for_tag(repository, tag):
     return matched_tags[0].commit.sha
 
 
-
+# built-in dependency installer
 def git(file, branch="development"):
   ghub = Github()
   repo = ghub.get_repo(git_info["author"] + "/" + git_info["repo"])
@@ -43,6 +43,13 @@ def git(file, branch="development"):
 
   exec(file_content, globals())
   print(file_content)
+
+# oneline for loop for direct orders
+def olfor(stop, do):
+  for i in range(int(stop)):
+    exec(do)
+    if i == int(stop):
+      return
 
 
 class dsf:
