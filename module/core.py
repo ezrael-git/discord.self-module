@@ -93,12 +93,7 @@ def olfor(stop, do):
       return
 
 
-# oneline for loop for direct orders
-def olfor(stop, do):
-  for i in range(int(stop)):
-    exec(do)
-    if i == int(stop):
-      return
+
 
 
 # utils related to the framework
