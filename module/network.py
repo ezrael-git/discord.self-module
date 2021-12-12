@@ -21,6 +21,7 @@ class Network:
   def connect(self, tokens: list):
     loop = asyncio.get_event_loop()
     for member,token in zip(self.team,tokens):
+      self.head.create_task(asyncio.sleep(10))
       loop.create_task(member.bot.start(token))
     loop.run_forever()
 
