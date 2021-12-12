@@ -60,7 +60,7 @@ class Network:
         continue
     return True
 
-  def listen_for(self, type):
+  async def listen_for(self, type):
     if type == "command":
       for member in self.workers:
         await member.hear()
