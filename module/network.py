@@ -1,5 +1,5 @@
 """ network.py
-for bundling the manager and worker components
+for the bundling of the manager and worker components
 """
 
 class Network:
@@ -47,4 +47,13 @@ class Network:
     if type == "command":
       for member in self.workers:
         await member.hear()
-    
+
+  def disconnect(self, **kwargs):
+    manager = kwargs.get("manager", False)
+    for member in self.team:
+      if member == self.manager:
+        if manager == True:
+          self.head.logout()
+      else:
+        member.bot.logout()
+    return True
