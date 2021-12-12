@@ -32,27 +32,45 @@ def get_sha_for_tag(repository, tag):
     return matched_tags[0].commit.sha
 
 
+
 # automatically get and exec() the latest commit from github
+
 # kwargs: author, repo, branch, path, mode
+
 # if mode is 0 (default), execute the output, else return it
+
 def git(**kwargs):
+
   # handling kwargs
+
   author, repo, branch, path, mode = kwargs.get("author"), kwargs.get("repo"), kwargs.get("branch"), kwargs.get("path"), kwargs.get("mode")
+
   if author == None:
+
     author = git_info["author"]
+
   if repo == None:
+
     repo = git_info["repo"]
+
   if branch == None:
+
     branch = "development"
+
   if path == None:
+
     raise ValueError("Expected path: required argument")
+
   if mode == None:
+
     mode = 0
+
   
 
-
   ghub = Github()
+
   repo = ghub.get_repo(author + "/" + repo)
+
   branch = repo.get_branch(branch=branch)
 
   sha = get_sha_for_tag(repo, branch.name)
@@ -60,8 +78,11 @@ def git(**kwargs):
   file_content = repo.get_contents(path, ref=sha).decoded_content.decode()
 
   if mode == 0:
+
     exec(file_content, globals())
+
   elif mode == 1:
+
     return file_content
 
 # oneline for loop for direct orders
@@ -71,6 +92,13 @@ def olfor(stop, do):
     if i == int(stop):
       return
 
+
+# oneline for loop for direct orders
+def olfor(stop, do):
+  for i in range(int(stop)):
+    exec(do)
+    if i == int(stop):
+      return
 
 
 # utils related to the framework
