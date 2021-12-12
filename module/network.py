@@ -15,6 +15,9 @@ class Network:
     for i in self.team: temp.append(i.bot)
     return temp
 
+  def _sendable(self, clientuser):
+    return self.head.get_user(clientuser.id)
+
   def wait_until_ready(self):
     for member in self.team:
       await member.bot.wait_until_ready()
