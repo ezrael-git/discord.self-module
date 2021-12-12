@@ -12,3 +12,4 @@ The Bot attribute of a class can be accessed through ```classInstance.bot```.
 discord.py-self is a fork of the popular discord.py wrapper. It allows one to interact with a user account, instead of a bot account.
 
 4) An order must follow this format, leading to a GitHub file:  `user:repo:path`
+Furthermore, order files must contain a function named `orderton`. This function, if detected, will be executed once detected by the framework. Hence, you should store all the code you want to execute, inside the function.
