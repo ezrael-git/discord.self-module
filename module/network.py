@@ -35,12 +35,12 @@ class Network:
     return True
     
 
-  def wait_until_ready(self):
+  async def wait_until_ready(self):
     for member in self.team:
       await member.bot.wait_until_ready()
     return True
 
-  def join_guild(self, invite, **kwargs):
+  async def join_guild(self, invite, **kwargs):
     wait = kwargs.get("wait", 60)
     for member in self.team:
       try:
@@ -50,7 +50,7 @@ class Network:
         continue
     return True
 
-  def leave_guild(self, id, **kwargs):
+  async def leave_guild(self, id, **kwargs):
     wait = kwargs.get("wait", 60)
     for member in self.team:
       try:
