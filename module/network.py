@@ -19,6 +19,9 @@ class Network:
   def _sendable(self, clientuser):
     return self.head.get_user(clientuser.id)
 
+  async def _thread(self, loop):
+    loop.run_forever()
+
   def connect(self, tokens: list, **kwargs):
     wait = kwargs.get("wait", 15)
     output = kwargs.get("output", False)
@@ -28,7 +31,7 @@ class Network:
     for member,token in zip(self.team,tokens):
       loop = asyncio.get_event_loop()
       loop.create_task(member.bot.start(token))
-      loop.run_forever()
+      member.bot.loop.create_task(_thread(loop))
       time.sleep(wait)
       if output == True:
         print(f"dsf::connect()::{member} has been added to the event loop")
