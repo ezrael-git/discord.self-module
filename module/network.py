@@ -18,6 +18,23 @@ class Network:
   def _sendable(self, clientuser):
     return self.head.get_user(clientuser.id)
 
+  def connect(self, tokens: list):
+    loop = asyncio.get_event_loop()
+    for member,token in zip(self.team,tokens):
+      loop.create_task(member.bot.start(token))
+    loop.run_until_complete()
+
+  def disconnect(self, **kwargs):
+    manager = kwargs.get("manager", False)
+    for member in self.team:
+      if member == self.manager:
+        if manager == True:
+          self.head.logout()
+      else:
+        member.bot.logout()
+    return True
+    
+
   def wait_until_ready(self):
     for member in self.team:
       await member.bot.wait_until_ready()
@@ -48,12 +65,4 @@ class Network:
       for member in self.workers:
         await member.hear()
 
-  def disconnect(self, **kwargs):
-    manager = kwargs.get("manager", False)
-    for member in self.team:
-      if member == self.manager:
-        if manager == True:
-          self.head.logout()
-      else:
-        member.bot.logout()
-    return True
+
