@@ -29,7 +29,7 @@ class Network:
 
     loop = asyncio.get_event_loop()
     for member,token in zip(self.team,tokens):
-      task = loop.create_task(member.start(token))
+      task = loop.create_task(member.bot.start(token))
       if output == True: print(f"{member} has been added to the loop")
 
     loop.run_forever()
