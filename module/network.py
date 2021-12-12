@@ -20,10 +20,13 @@ class Network:
 
   async def connect(self, tokens: list, **kwargs):
     wait = kwargs.get("wait", 30)
+    output = kwargs.get("output", False)
     loop = asyncio.get_event_loop()
     for member,token in zip(self.team,tokens):
       await asyncio.sleep(wait)
       loop.create_task(member.bot.start(token))
+      if output == True:
+        print(f"{member.bot.user.name} has connected to Discord!")
     loop.run_forever()
 
   def disconnect(self, **kwargs):
