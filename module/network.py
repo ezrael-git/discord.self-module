@@ -24,6 +24,7 @@ class Network:
 
   def connect(self, tokens: list, **kwargs):
     output = kwargs.get("output", False)
+    wait = kwargs.get("wait", 5)
 
     if output == True: print(f"Network.connect(): initiated")
 
@@ -31,6 +32,7 @@ class Network:
     for member,token in zip(self.team,tokens):
       task = loop.create_task(member.bot.start(token))
       if output == True: print(f"Network.connect(): {member} has been added to the loop")
+      time.sleep(wait)
     if output == True: print(f"Network.connect(): resolved")
     loop.run_forever()
 
