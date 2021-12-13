@@ -25,14 +25,26 @@ class Network:
   def connect(self, tokens: list, **kwargs):
     output = kwargs.get("output", False)
     wait = kwargs.get("wait", 5)
+    additional = kwargs.get("additional", [])
 
     if output == True: print(f"Network.connect(): initiated")
 
     loop = asyncio.get_event_loop()
     for member,token in zip(self.team,tokens):
-      task = loop.create_task(member.bot.start(token))
+      loop.create_task(member.bot.start(token))
       if output == True: print(f"Network.connect(): {member} has been added to the loop")
       time.sleep(wait)
+
+    # resolving additional
+    if len(additional) != 0:
+      count = 0
+      for add in additional:
+        count += 1
+        _bot, _token = add.split('::')
+        loop.create_task(_bot.start(_token))
+        if output == True: print(f"Network.connect(): resolved add {count} of {len(additional)}")
+      time.sleep(wait)
+
     if output == True: print(f"Network.connect(): resolved")
     loop.run_forever()
 
