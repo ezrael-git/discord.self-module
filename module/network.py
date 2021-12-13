@@ -41,7 +41,7 @@ class Network:
       for add in additional.items():
         count += 1
         _bot, _token = add[0], add[1]
-        loop.create_task(_bot.start(_token))
+        loop.create_task(_bot.start(str(_token)))
         if output == True: print(f"Network.connect(): resolved add {count} of {len(additional)}")
       time.sleep(wait)
 
