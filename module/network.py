@@ -93,12 +93,15 @@ class Network:
 
   async def send(self, channel, msg, **kwargs):
     manager = kwargs.get("manager", False)
+    wait = kwargs.get("wait", 3)
+
     channel = int(channel)
     if manager:
-      self.head.get_channel(channel).send(msg)
+      await self.head.get_channel(channel).send(msg)
     for worker in self.workers:
       try:
-        worker.bot.get_channel(channel).send(msg)
+        await worker.bot.get_channel(channel).send(msg)
+        await asyncio.sleep(wait)
       except Exception as e:
         print(f"Error in Network.send(): {e}")
 
