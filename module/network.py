@@ -25,7 +25,7 @@ class Network:
   def connect(self, tokens: list, **kwargs):
     output = kwargs.get("output", False)
     wait = kwargs.get("wait", 5)
-    additional = kwargs.get("additional", [])
+    additional = kwargs.get("additional", {})
 
     if output == True: print(f"Network.connect(): initiated")
 
@@ -38,9 +38,9 @@ class Network:
     # resolving additional
     if len(additional) != 0:
       count = 0
-      for add in additional:
+      for add in additional.items():
         count += 1
-        _bot, _token = add.split('::')
+        _bot, _token = add[0], add[1]
         loop.create_task(_bot.start(_token))
         if output == True: print(f"Network.connect(): resolved add {count} of {len(additional)}")
       time.sleep(wait)
