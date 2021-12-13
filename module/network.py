@@ -105,7 +105,7 @@ class Network:
       except Exception as e:
         print(f"Error in Network.send(): {e}")
 
-  async def guilds(self):
+  def guilds(self):
     temp = []
     for member in self.team:
       for guild in member.bot.guilds:
