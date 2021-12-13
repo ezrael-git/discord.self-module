@@ -101,7 +101,8 @@ class Network:
     for worker in self.workers:
       try:
         await worker.bot.get_channel(channel).send(msg)
-        await asyncio.sleep(wait)
+        if wait != 0:
+          await asyncio.sleep(wait)
       except Exception as e:
         print(f"Error in Network.send(): {e}")
 
