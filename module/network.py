@@ -91,4 +91,24 @@ class Network:
       for member in self.workers:
         await member.hear()
 
+  async def send(self, channel, msg, **kwargs):
+    manager = kwargs.get("manager", False)
+    channel = int(channel)
+    if manager:
+      self.head.get_channel(channel).send(msg)
+    for worker in self.workers:
+      try:
+        worker.bot.get_channel(channel).send(msg)
+      except Exception as e:
+        print(f"Error in Network.send(): {e}")
+
+  async def guilds(self):
+    temp = []
+    for member in self.team:
+      for guild in member.bot.guilds:
+        if not guild in temp:
+          temp.append(guild)
+    return temp
+
+
 
