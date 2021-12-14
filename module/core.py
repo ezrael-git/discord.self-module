@@ -78,13 +78,13 @@ class dsf:
   @classmethod
   def filetype(self, name):
 
-    # install network.py
-    git(path="/module/network.py")
-
     # install deforder.py   
     # contains all the default orders, also called deforders
     # deforders are executed directly, there is no need to worker.hear()
     git(path="/module/deforder.py")
+
+    # install network.py
+    git(path="/module/network.py")
 
     valid = ["worker", "manager", "dual", "__ignore__"]
     if name in valid:
