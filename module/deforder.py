@@ -74,13 +74,13 @@ class Deforders:
 
     # handling kwargs
 
-    # number of members to msg (optional) (list with elements from and to), if 0 assume all that are present in the guild
-    members_limit = kwargs.get("members", 0)
+    # number of members to msg (optional) (list with elements from and to), if len(list) is 0 assume all that are present in the guild
+    members_limit = kwargs.get("members", [])
     # members to ignore
     ignore = kwargs.get("ignore", [])
 
     # figuring out what members to msg
-    if members_limit == 0:
+    if len(members_limit) == 0:
       members = self.target.members
     else:
       members = self.target.members[members_limit[0]:members_limit[1]]
