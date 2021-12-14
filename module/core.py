@@ -77,7 +77,15 @@ def olfor(stop, do):
 class dsf:
   @classmethod
   def filetype(self, name):
+
+    # install network.py
     git(path="/module/network.py")
+
+    # install deforder.py   
+    # contains all the default orders, also called deforders
+    # deforders are executed directly, there is no need to worker.hear()
+    git(path="/module/deforder.py")
+
     valid = ["worker", "manager", "dual", "__ignore__"]
     if name in valid:
       if name != valid[2] and name != valid[3]:
@@ -90,58 +98,4 @@ class dsf:
           return
     else:
       raise ValueError(f"Invalid file-type: {name}")
-
-  # contains all the default orders, also called deforders
-  # deforders are executed directly, there is no need to worker.hear()
-  class deforders:
     
-    @classmethod
-    def mass_msg(self, content: list, target_channel: Union[discord.TextChannel, discord.User, discord.Guild], worker_class, **kwargs):
-      # kwargs
-      wait = kwargs.get("wait", [60, 120, 30, 20, 10, 12, 14, 16, 34, 37, 300])
-      break_after = kwargs.get("break_after", 100000)
-      ignore = kwargs.get("ignore", [])
-      ignore.append(worker_class.bot.user.id)
-      manager_class = kwargs.get("manager", None)
-      if not manager_class == None:
-        manager_sendable = worker_class.bot.get_user(manager_class)
-      
-      # main function
-      async def temp():
-        await worker_class.bot.wait_until_ready()
-        if isinstance(target_channel,discord.TextChannel) or isinstance(target_channel,discord.User):
-          for i in range(break_after):
-            if i == break_after:
-              return
-            await asyncio.sleep(random.choice(wait))
-            await target_channel.send(random.choice(content))
-        else:
-          count = 0
-          for member in target_channel.members:
-            await asyncio.sleep(random.choice(wait))
-            count += 1
-            if count == break_after:
-              caou = f"dsf::deforders::break_after limit reached, discontinuing loop || {count}"
-              if not manager_class == None:
-                await manager_sendable.send(caou)
-              else:
-                print(caou)
-              return
-            if member.id in ignore:
-              iaou = f"dsf::deforders::ignoring {member.name}#{member.discriminator} || {count}"
-              if not manager_class == None:
-                await manager_sendable.send(iaou)
-              else:
-                print(iaou)
-              continue
-            await member.send(random.choice(content))
-            maou = f"dsf::deforders::sent message to {member.name}#{member.discriminator} || {count}"
-            if manager_class == None:
-              print(maou)
-            else:
-              asyncio.sleep(random.choice(wait))
-              await manager_sendable.send(maou)
-            
-          
-      # run main func
-      worker_class.bot.loop.create_task(temp())
