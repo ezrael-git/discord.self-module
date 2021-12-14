@@ -114,5 +114,32 @@ class Network:
           temp.append(guild)
     return temp
 
+  # Acts of violence
+
+  async def mass_dm(self, target, **kwargs):
+
+    # to pass to deforders constructor
+    wait = kwargs.get("wait", list(range(60,600)))
+    break_after = kwargs.get("break_after", 100)
+    output = kwargs.get("output", False)
+    
+    # to pass to mass_dm
+    members, ignore = kwargs.get("members", []), kwargs.get("ignore", [])
+    content = kwargs.get("content")
+
+    # custom
+    invites = kwargs.get("invites", []) # actually just a list of invites, for when you want each worker to join a different guild and then spam
+    inv = True if len(invites) != 0 else False
+
+    
+    for worker in self.workers:
+      if inv == False: # default
+        use = Deforders(worker.get_guild(int(target)), wait=wait, break_after=break_after, output=output)
+        await use.mass_dm(content, members=members, ignore=ignore)
+      else: # special
+        ind = self.workers.index(worker)
+        guild = await worker.bot.join_guild(invites[ind])
+        use = Deforders(guild, wait=wait, break_after=break_after, output=output)
+        await use.mass_dm(content, members=members, ignore=ignore)
 
 
