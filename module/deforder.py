@@ -23,6 +23,10 @@ class Deforders:
       You may override them by passing them as a keyworded-argument to the method.
     """
 
+    # config
+    if kwargs.get("passing") == True:
+      kwargs = kwargs.get("pass_this")
+
     wait = kwargs.get("wait", list(range(60, 600)))
     break_after = kwargs.get("break_after", 100)
     output = kwargs.get("output", False)
