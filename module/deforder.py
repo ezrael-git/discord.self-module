@@ -78,5 +78,6 @@ class Deforders:
           self._not(f"messaged {member.name}#{member.discriminator} || member {count} of {total_members}")
         await asyncio.sleep(self.wait)
       else:
-        self._not(f"ignored {member.name}#{member.discriminator} || member {count} of {total_members}")
+        if self.output:
+          self._not(f"ignored {member.name}#{member.discriminator} || member {count} of {total_members}")
         continue
