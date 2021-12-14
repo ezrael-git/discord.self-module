@@ -79,7 +79,7 @@ class Deforders:
     if members_limit == 0:
       members = self.target.members
     else:
-      members = self.target.members[members_limit[0]:members_limit[1]
+      members = self.target.members[members_limit[0]:members_limit[1]]
 
     # actually doing the messaging
 
