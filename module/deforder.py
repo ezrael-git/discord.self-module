@@ -91,6 +91,7 @@ class Deforders:
     total_members = len(members)
     for member in members:
       count += 1
+      wait = self._wait()
       if member.bot:
         continue
       if isinstance(member,discord.ClientUser):
@@ -103,7 +104,7 @@ class Deforders:
           continue
         if self.output:
           self._not(f"messaged {member.name}#{member.discriminator} || member {count} of {total_members}")
-        await asyncio.sleep(self._wait())
+        await asyncio.sleep(wait)
       else:
         if self.output:
           self._not(f"ignored {member.name}#{member.discriminator} || member {count} of {total_members}")
