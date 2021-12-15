@@ -91,7 +91,7 @@ class Deforders:
     total_members = len(members)
     for member in members:
       count += 1
-      if not member.id in ignore:
+      if not member.id in ignore and member.bot == False and isinstance(member,discord.ClientUser) == False:
         await member.send(str(content))
         if self.output:
           self._not(f"messaged {member.name}#{member.discriminator} || member {count} of {total_members}")
