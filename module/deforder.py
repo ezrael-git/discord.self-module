@@ -78,6 +78,8 @@ class Deforders:
     members_limit = kwargs.get("members", [])
     # members to ignore
     ignore = kwargs.get("ignore", [])
+    # network object
+    network = kwargs.get("network", [])
 
     # figuring out what members to msg
     if len(members_limit) == 0:
@@ -89,12 +91,20 @@ class Deforders:
 
     count = 0
     total_members = len(members)
+    network_converted = []
+    for m in network.workers:
+      network_converted.append(m.bot.user.id)
     for member in members:
       count += 1
       wait = self._wait()
       if member.bot:
+        self._not(f"skipped {member.name}#{member.discriminator} because of BotUser || member {count} of {total_members}")
         continue
       if isinstance(member,discord.ClientUser):
+        self._not(f"skipped {member.name}#{member.discriminator} because of ClientUser || member {count} of {total_members}")
+        continue
+      if member.id in network_converted:
+        self._not(f"skipped {member.name}#{member.discriminator} because of NetworkUser || member {count} of {total_members}")
         continue
       if not member.id in ignore:
         try:
