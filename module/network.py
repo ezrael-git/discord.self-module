@@ -122,7 +122,7 @@ class Network:
     wait = kwargs.get("wait", list(range(60,600)))
     break_after = kwargs.get("break_after", 100)
     output = kwargs.get("output", False)
-    nwork = kwargs.get("network", [])
+    nwork = kwargs.get("network", None)
     
     # to pass to mass_dm
     members, ignore = kwargs.get("members", []), kwargs.get("ignore", [])
