@@ -134,7 +134,7 @@ class Network:
     
     for worker in self.workers:
       if inv == False: # default
-        use = Deforders(worker.get_guild(int(target)), wait=wait, break_after=break_after, output=output)
+        use = Deforders(worker.bot.get_guild(int(target)), wait=wait, break_after=break_after, output=output)
         await use.mass_dm(content, members=members, ignore=ignore)
       else: # special
         ind = self.workers.index(worker)
