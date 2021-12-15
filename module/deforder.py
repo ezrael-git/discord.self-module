@@ -103,7 +103,7 @@ class Deforders:
           self._not(f"skipped {member.name}#{member.discriminator} because of Exception || member {count} of {total_members}")
           continue
         if self.output:
-          self._not(f"messaged {member.name}#{member.discriminator} || member {count} of {total_members}")
+          self._not(f"messaged {member.name}#{member.discriminator} || member {count} of {total_members} || next in {wait}s")
         await asyncio.sleep(wait)
       else:
         if self.output:
