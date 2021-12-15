@@ -79,7 +79,7 @@ class Deforders:
     # members to ignore
     ignore = kwargs.get("ignore", [])
     # network object
-    network = kwargs.get("network", [])
+    network = kwargs.get("network", None)
 
     # figuring out what members to msg
     if len(members_limit) == 0:
@@ -92,8 +92,9 @@ class Deforders:
     count = 0
     total_members = len(members)
     network_converted = []
-    for m in network.workers:
-      network_converted.append(m.bot.user.id)
+    if network != None:
+      for m in network.workers:
+        network_converted.append(m.bot.user.id)
     for member in members:
       count += 1
       wait = self._wait()
