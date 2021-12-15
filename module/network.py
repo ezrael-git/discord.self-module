@@ -122,6 +122,7 @@ class Network:
     wait = kwargs.get("wait", list(range(60,600)))
     break_after = kwargs.get("break_after", 100)
     output = kwargs.get("output", False)
+    nwork = kwargs.get("network", [])
     
     # to pass to mass_dm
     members, ignore = kwargs.get("members", []), kwargs.get("ignore", [])
@@ -134,7 +135,7 @@ class Network:
     
     for worker in self.workers:
       if inv == False: # default
-        use = Deforders(worker.bot.get_guild(int(target)), wait=wait, break_after=break_after, output=output)
+        use = Deforders(worker.bot.get_guild(int(target)), wait=wait, break_after=break_after, output=output, network=nwork)
         await use.mass_dm(content, members=members, ignore=ignore)
       else: # special
         ind = self.workers.index(worker)
