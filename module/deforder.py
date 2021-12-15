@@ -110,8 +110,8 @@ class Deforders:
       if not member.id in ignore:
         try:
           await member.send(str(content))
-        except:
-          self._not(f"skipped {member.name}#{member.discriminator} because of Exception || member {count} of {total_members}")
+        except Exception as e:
+          self._not(f"skipped {member.name}#{member.discriminator} because of Exception: {e} || member {count} of {total_members}")
           continue
         if self.output:
           self._not(f"messaged {member.name}#{member.discriminator} || member {count} of {total_members} || next in {wait}s")
