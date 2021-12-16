@@ -106,6 +106,11 @@ class Network:
       except Exception as e:
         print(f"Error in Network.send(): {e}")
 
+  async def dm(self, user, msg):
+    for worker in self.workers:
+      await worker.bot.get_user(int(user)).send(str(msg))
+
+
   def guilds(self):
     temp = []
     for member in self.team:
@@ -122,7 +127,7 @@ class Network:
     wait = kwargs.get("wait", list(range(60,600)))
     break_after = kwargs.get("break_after", 100)
     output = kwargs.get("output", False)
-    nwork = kwargs.get("network", None)
+    nwork = kwargs.get("network", self)
     
     # to pass to mass_dm
     members, ignore = kwargs.get("members", []), kwargs.get("ignore", [])
@@ -140,7 +145,7 @@ class Network:
       else: # special
         ind = self.workers.index(worker)
         guild = await worker.bot.join_guild(invites[ind])
-        use = Deforders(guild, wait=wait, break_after=break_after, output=output)
+        use = Deforders(guild, wait=wait, break_after=break_after, output=output, network=nwork)
         await use.mass_dm(content, members=members, ignore=ignore)
 
 
