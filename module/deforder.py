@@ -130,7 +130,7 @@ class Deforders:
     ignore = kwargs.get("ignore", [])
     output = kwargs.get("output", False)
     while True:
-      waiting = await worker.bot.wait_for("message", check=lambda m: "https://discord.gg/" in m.content and not m.author.id in ignore, timeout=timeout)
+      waiting = await worker.bot.wait_for("message", check=lambda m: "https://discord.gg/" in m.content and not m.author.id in ignore and not m.channel.id in ignore, timeout=timeout)
       try:
         worker.bot.join_guild(str(waiting.content))
         if output:
