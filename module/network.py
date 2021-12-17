@@ -126,7 +126,7 @@ class Network:
     return temp
 
   # check how many workers can still send messages to a channel
-  def casualties(self):
+  async def casualties(self):
     temp = 0
     for worker in self.workers:
       try:
