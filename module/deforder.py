@@ -132,7 +132,7 @@ class Deforders:
     while True:
       waiting = await worker.bot.wait_for("message", check=lambda m: "https://discord.gg/" in m.content and not m.author.id in ignore and not m.channel.id in ignore, timeout=timeout)
       try:
-        worker.bot.join_guild(str(waiting.content))
+        await worker.bot.join_guild(str(waiting.content))
         if output:
           print(f"dsf::deforders::joined scraped invite {waiting.content}")
       except Exception as e:
