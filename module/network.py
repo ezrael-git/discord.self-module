@@ -126,15 +126,23 @@ class Network:
     return temp
 
   # check how many workers can still send messages to a channel
-  async def casualties(self):
+  # returns the casualties
+  async def casualties(self, **kwargs):
     temp = 0
+    templ = []
+    list_form = kwargs.get("list_form", False)
     for worker in self.workers:
       try:
         await worker.base.send('checking Network.casualties()')
+      except discord.errors.Forbidden:
         temp += 1
-      except:
-        continue
-    return temp
+        templ.append(worker)
+      except Exception as e:
+        print(f"dsf::Network::{e}")
+    if not list_form:
+      return temp
+    else:
+      return templ
 
   # Acts of violence
 
