@@ -125,6 +125,17 @@ class Network:
           temp.append(guild)
     return temp
 
+  # check how many workers can still send messages to a channel
+  def casualties(self):
+    temp = 0
+    for worker in self.workers:
+      try:
+        worker.base.send('checking Network.casualties()')
+        temp += 1
+      except:
+        continue
+    return temp
+
   # Acts of violence
 
   async def mass_dm(self, target, **kwargs):
