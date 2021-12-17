@@ -130,7 +130,7 @@ class Network:
     temp = 0
     for worker in self.workers:
       try:
-        worker.base.send('checking Network.casualties()')
+        await worker.base.send('checking Network.casualties()')
         temp += 1
       except:
         continue
