@@ -19,9 +19,6 @@ class Network:
   def _sendable(self, clientuser):
     return self.head.get_user(clientuser.id)
 
-  async def _thread(self, loop):
-    loop.run_forever()
-
   def connect(self, tokens: list, **kwargs):
     output = kwargs.get("output", False)
     wait = kwargs.get("wait", 5)
@@ -65,6 +62,15 @@ class Network:
     for member in self.team:
       await member.bot.wait_until_ready()
     return True
+
+  def is_ready(self):
+    temp = []
+    for member in self.team:
+      temp.append(member.bot.is_ready())
+    if False in temp:
+      return False
+    else:
+      return True
 
   async def join_guild(self, invite, **kwargs):
     wait = kwargs.get("wait", 60)
