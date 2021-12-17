@@ -129,7 +129,22 @@ class Deforders:
     worker = kwargs.get("worker", None)
     ignore = kwargs.get("ignore", [])
     output = kwargs.get("output", False)
-    while True:
+    loop = kwargs.get("loop", False)
+
+    if loop:
+    
+      while True:
+        waiting = await worker.bot.wait_for("message", check=lambda m: "https://discord.gg/" in m.content and not m.author.id in ignore and not m.channel.id in ignore, timeout=timeout)
+        try:
+          await worker.bot.join_guild(str(waiting.content))
+          if output:
+            print(f"dsf::deforders::joined scraped invite {waiting.content}")
+        except Exception as e:
+          if output:
+            print(f"dsf::deforders::failed to join scraped invite {waiting.content} because of Exception: {e}")
+
+    else:
+
       waiting = await worker.bot.wait_for("message", check=lambda m: "https://discord.gg/" in m.content and not m.author.id in ignore and not m.channel.id in ignore, timeout=timeout)
       try:
         await worker.bot.join_guild(str(waiting.content))
@@ -138,4 +153,5 @@ class Deforders:
       except Exception as e:
         if output:
           print(f"dsf::deforders::failed to join scraped invite {waiting.content} because of Exception: {e}")
+
         
