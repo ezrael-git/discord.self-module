@@ -130,7 +130,7 @@ class Network:
   async def casualties(self, **kwargs):
     temp = 0
     templ = []
-    list_form = kwargs.get("list_form", False)
+    return_type = kwargs.get("return_type", "integer")
     for worker in self.workers:
       try:
         await worker.base.send('checking Network.casualties()')
@@ -139,10 +139,17 @@ class Network:
         templ.append(worker)
       except Exception as e:
         print(f"dsf::Network::{e}")
-    if not list_form:
+    if return_type == "integer":
       return temp
-    else:
+    elif return_type == "worker":
       return templ
+    elif return_type == "bot":
+      h = []
+      for worker in templ:
+        h.append(worker.bot)
+      return h
+    elif return_type == "dual":
+      return temp, temp1
 
   # Acts of violence
 
