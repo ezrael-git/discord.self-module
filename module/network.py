@@ -149,7 +149,7 @@ class Network:
         h.append(worker.bot)
       return h
     elif return_type == "dual":
-      return temp, temp1
+      return temp, templ
 
   # Acts of violence
 
