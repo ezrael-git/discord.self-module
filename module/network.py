@@ -187,6 +187,12 @@ class Network:
     """
     Verification types, or types, declare the kind of verification that is required in the server.
     There are currently two supported types: reaction and message.
+
+    Verification by reaction:
+      This is for servers that require you to verify by reacting to a message in a channel.
+
+    Verification by message:
+      This is for servers that require you to verify by sending a message with a specific content in a channel.
     """
 
     if type == "reaction":
