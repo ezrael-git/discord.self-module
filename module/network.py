@@ -112,6 +112,7 @@ class Network:
       except Exception as e:
         print(f"Error in Network.send(): {e}")
 
+
   async def dm(self, user, msg):
     for worker in self.workers:
       await worker.bot.get_user(int(user)).send(str(msg))
@@ -177,4 +178,27 @@ class Network:
         ind = self.workers.index(worker)
         guild = await worker.bot.join_guild(invites[ind])
         await Deforders.mass_dm(content, members=members, ignore=ignore, target=int(target), wait=wait, break_after=break_after, output=output, network=nwork)
+
+  async def verify(self, channel, **kwargs):
+    limit = kwargs.get("limit", 20)
+    type = kwargs.get("type", "reaction")
+
+    """
+    Verification types, or types, declare the kind of verification that is required in the server.
+    There are currently two supported types: reaction and message.
+    """
+
+    if type == "reaction":
+      history = await channel.history(limit=limit).flatten()
+      for message in history:
+        reacts = message.reactions
+        if reacts != 0:
+          first_reaction = reacts[0]
+          message.add_reaction(first_reaction.emoji
+    elif type == "message":
+      verif_msg = kwargs.get("content", None)
+      if verif_msg != None:
+        await channel.send(str(verif_msg))
+      else:
+        return
 
