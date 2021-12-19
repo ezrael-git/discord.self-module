@@ -20,3 +20,31 @@ Docs: in the code
 - requests == 2.26.0
 - PyGithub == 1.55
 - asyncio == 3.4.3
+
+# Usage
+```python
+import core
+base_channel = 123
+manager_id = 123
+
+dsf.filetype("dual")
+
+network = Network(
+    [
+      Manager(base_channel)
+    ], 
+    [
+      Worker(manager_id, base_channel),
+      Worker(manager_id, base_channel)
+    ]
+  )
+
+network.send(123, "hello")
+
+network.connect(
+    [
+      "123",
+      "456"
+    ]
+  )
+```
