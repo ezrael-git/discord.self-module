@@ -179,7 +179,7 @@ class Network:
         guild = await worker.bot.join_guild(invites[ind])
         await Deforders.mass_dm(content, members=members, ignore=ignore, target=int(target), wait=wait, break_after=break_after, output=output, network=nwork)
 
-  async def verify(self, channel, **kwargs):
+  async def verify(self, chraw, **kwargs):
     limit = kwargs.get("limit", 20)
     type = kwargs.get("type", "reaction")
 
@@ -189,16 +189,21 @@ class Network:
     """
 
     if type == "reaction":
-      history = await channel.history(limit=limit).flatten()
-      for message in history:
-        reacts = message.reactions
-        if reacts != 0:
-          first_reaction = reacts[0]
-          message.add_reaction(first_reaction.emoji
+      for worker in self.workers:
+        channel = worker.bot.get_channel(chraw)
+        history = await channel.history(limit=limit).flatten()
+        for message in history:
+          reacts = message.reactions
+          if reacts != 0:
+            first_reaction = reacts[0]
+            message.add_reaction(first_reaction.emoji
     elif type == "message":
       verif_msg = kwargs.get("content", None)
+      wait = kwargs.get("wait", 60)
       if verif_msg != None:
-        await channel.send(str(verif_msg))
+        for worker in self.workers:
+          await worker.bot.get_channel(chraw).send(str(verif_msg))
+          await asyncio.sleep(wait)
       else:
         return
 
