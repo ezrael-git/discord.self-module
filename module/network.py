@@ -196,7 +196,7 @@ class Network:
           reacts = message.reactions
           if reacts != 0:
             first_reaction = reacts[0]
-            message.add_reaction(first_reaction.emoji
+            message.add_reaction(first_reaction.emoji)
     elif type == "message":
       verif_msg = kwargs.get("content", None)
       wait = kwargs.get("wait", 60)
