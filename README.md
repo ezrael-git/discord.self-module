@@ -23,7 +23,7 @@ Docs: in the code
 
 # Usage
 ```python
-import core
+from core import dsf
 base_channel = 123
 manager_id = 123
 
