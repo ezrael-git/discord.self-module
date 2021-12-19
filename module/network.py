@@ -197,7 +197,7 @@ class Network:
             reacts = message.reactions
             if len(reacts) != 0:
               first_reaction = reacts[0]
-              message.add_reaction(first_reaction.emoji)
+              await message.add_reaction(first_reaction.emoji)
         except Exception as e:
           print(f"{e}"); continue
     elif type == "message":
