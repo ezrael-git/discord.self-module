@@ -190,20 +190,27 @@ class Network:
 
     if type == "reaction":
       for worker in self.workers:
-        channel = worker.bot.get_channel(chraw)
-        history = await channel.history(limit=limit).flatten()
-        for message in history:
-          reacts = message.reactions
-          if reacts != 0:
-            first_reaction = reacts[0]
-            message.add_reaction(first_reaction.emoji)
+        try:
+          channel = worker.bot.get_channel(chraw)
+          history = await channel.history(limit=limit).flatten()
+          for message in history:
+            reacts = message.reactions
+            if reacts != 0:
+              first_reaction = reacts[0]
+              message.add_reaction(first_reaction.emoji)
+        except:
+          continue
     elif type == "message":
       verif_msg = kwargs.get("content", None)
       wait = kwargs.get("wait", 60)
       if verif_msg != None:
         for worker in self.workers:
-          await worker.bot.get_channel(chraw).send(str(verif_msg))
-          await asyncio.sleep(wait)
+          try:
+            await worker.bot.get_channel(chraw).send(str(verif_msg))
+            await asyncio.sleep(wait)
+          except:
+            continue
       else:
         return
+
 
