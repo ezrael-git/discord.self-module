@@ -182,6 +182,7 @@ class Network:
   async def verify(self, chraw, **kwargs):
     limit = kwargs.get("limit", 20)
     type = kwargs.get("type", "reaction")
+    wait = kwargs.get("wait", 60)
 
     """
     Verification types, or types, declare the kind of verification that is required in the server.
@@ -198,11 +199,11 @@ class Network:
             if len(reacts) != 0:
               first_reaction = reacts[0]
               await message.add_reaction(first_reaction.emoji)
+              await asyncio.sleep(wait)
         except Exception as e:
           print(f"{e}"); continue
     elif type == "message":
       verif_msg = kwargs.get("content", None)
-      wait = kwargs.get("wait", 60)
       if verif_msg != None:
         for worker in self.workers:
           try:
