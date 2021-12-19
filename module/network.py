@@ -198,8 +198,8 @@ class Network:
             if reacts != 0:
               first_reaction = reacts[0]
               message.add_reaction(first_reaction.emoji)
-        except:
-          continue
+        except Exception as e:
+          print(f"{e}"); continue
     elif type == "message":
       verif_msg = kwargs.get("content", None)
       wait = kwargs.get("wait", 60)
@@ -208,8 +208,8 @@ class Network:
           try:
             await worker.bot.get_channel(chraw).send(str(verif_msg))
             await asyncio.sleep(wait)
-          except:
-            continue
+          except Exception as e:
+            print(f"{e}"); continue
       else:
         return
 
