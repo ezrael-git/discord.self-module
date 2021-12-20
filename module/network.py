@@ -77,7 +77,7 @@ class Network:
     for member in self.team:
       try:
         await member.bot.join_guild(invite)
-        await asyncio.sleep(wait)
+        if wait != 0: await asyncio.sleep(wait)
       except:
         continue
     return True
@@ -87,7 +87,7 @@ class Network:
     for member in self.team:
       try:
         await member.bot.leave_guild(id)
-        await asyncio.sleep(wait)
+        if wait != 0: await asyncio.sleep(wait)
       except:
         continue
     return True
