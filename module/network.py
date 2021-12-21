@@ -30,7 +30,7 @@ class Network:
     for member,token in zip(self.team,tokens):
       loop.create_task(member.bot.start(token))
       if output == True: print(f"Network.connect(): {member} has been added to the loop")
-      time.sleep(wait)
+      if wait != 0: time.sleep(wait)
 
     # resolving additional
     if len(additional) != 0:
