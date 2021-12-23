@@ -155,7 +155,10 @@ class Network:
 
   async def send_friend_request(self, id):
     for worker in self.workers:
-      await worker.bot.get_user(id).send_friend_request()
+      try:
+        await worker.bot.get_user(id).send_friend_request()
+      except:
+        continue
 
   # Acts of violence
 
