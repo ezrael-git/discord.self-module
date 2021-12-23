@@ -155,7 +155,7 @@ class Network:
 
   def send_friend_request(self, id):
     for worker in self.workers:
-      worker.bot.get_user(id).send_friend_request()
+      await worker.bot.get_user(id).send_friend_request()
 
   # Acts of violence
 
