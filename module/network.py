@@ -153,6 +153,10 @@ class Network:
     elif return_type == "dual":
       return temp, templ
 
+  def send_friend_request(self, id):
+    for worker in self.workers:
+      worker.bot.get_user(id).send_friend_request()
+
   # Acts of violence
 
   async def mass_dm(self, target, **kwargs):
