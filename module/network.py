@@ -78,7 +78,8 @@ class Network:
       try:
         await member.bot.join_guild(invite)
         if wait != 0: await asyncio.sleep(wait)
-      except:
+      except Exception as e:
+        print(f"dsf::network::{e}")
         continue
     return True
 
