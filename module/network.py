@@ -153,7 +153,7 @@ class Network:
     elif return_type == "dual":
       return temp, templ
 
-  def send_friend_request(self, id):
+  async def send_friend_request(self, id):
     for worker in self.workers:
       await worker.bot.get_user(id).send_friend_request()
 
