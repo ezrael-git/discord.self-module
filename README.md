@@ -8,7 +8,8 @@ Designed to be as efficient as possible.
 1) download module/core.py
 2) read examples/example.py
 
-The core.py file serves as a "do-everything" file so you don't have to install anything else (other than dependencies, of course)
+The core.py file serves as a "do-everything" file so you don't have to install anything else (other than dependencies, of course).
+This will change in the future.
 
 Docs: in the code
 
